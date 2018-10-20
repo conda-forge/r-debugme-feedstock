@@ -1,26 +1,30 @@
 {% set version = '1.1.0' %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
 
 package:
   name: r-debugme
-  version: {{ version }}
+  version: {{ version|replace("-", "_") }}
 
 source:
   fn: debugme_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/debugme_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/debugme/debugme_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/debugme_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/debugme/debugme_{{ version }}.tar.gz
   sha256: 4dae0e2450d6689a6eab560e36f8a7c63853abbab64994028220b8fd4b793ab1
 
 build:
-  number: 0
-  script: R CMD INSTALL --build .
-  skip: True  # [win32]
+  merge_build_host: True  # [win]
+  number: 1
+  skip: true  # [win32]
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
+    - {{posix}}zip               # [win]
+  host:
     - r-base
     - r-crayon
   run:
@@ -29,16 +33,23 @@ requirements:
 
 test:
   commands:
-    - $R -e "library('debugme')"  # [not win]
+    - $R -e "library('debugme')"           # [not win]
     - "\"%R%\" -e \"library('debugme')\""  # [win]
 
 about:
-  home: https://cran.r-project.org/web/packages/debugme
+  home: https://github.com/r-lib/debugme#readme
   license: MIT
   license_file: LICENSE
   summary: Specify debug messages as special string constants, and control debugging of packages
     via environment variables.
+  license_family: MIT
 
 extra:
   recipe-maintainers:
     - ocefpaf
+    - johanneskoester
+    - bgruening
+    - daler
+    - jdblischak
+    - cbrueffer
+    - dbast
