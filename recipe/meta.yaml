@@ -7,7 +7,6 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  fn: debugme_{{ version }}.tar.gz
   url:
     - {{ cran_mirror }}/src/contrib/debugme_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/debugme/debugme_{{ version }}.tar.gz
@@ -39,18 +38,14 @@ test:
 about:
   home: https://github.com/r-lib/debugme#readme
   license: MIT
-  license_file: LICENSE
   summary: Specify debug messages as special string constants, and control debugging of packages
     via environment variables.
   license_family: MIT
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/MIT
+    - LICENSE
 
 extra:
   recipe-maintainers:
     - conda-forge/r
     - ocefpaf
-    - johanneskoester
-    - bgruening
-    - daler
-    - jdblischak
-    - cbrueffer
-    - dbast
