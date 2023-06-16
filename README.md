@@ -1,11 +1,11 @@
-About r-debugme
-===============
+About r-debugme-feedstock
+=========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-debugme-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/r-lib/debugme#readme
 
 Package license: MIT
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-debugme-feedstock/blob/main/LICENSE.txt)
 
 Summary: Specify debug messages as special string constants, and control debugging of packages via environment variables.
 
